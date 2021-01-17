@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "197bfbd4-bd35-45ef-af64-913b62e01c10",
+		"name": "Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://swapi.dev/api/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//1st case\r",
+							"pm.test(\"Ez otvet\", function() {\r",
+							"    pm.response.to.have.jsonBody()\r",
+							"})\r",
+							";\r",
+							"//2nd case\r",
+							"pm.test(\"Check the declared fields\", function() {\r",
+							"    const jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property(\"people\");\r",
+							"        pm.expect(jsonData).to.have.property(\"planets\");\r",
+							"    pm.expect(jsonData).to.have.property(\"films\");\r",
+							"    pm.expect(jsonData).to.have.property(\"species\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							"//3rd case - Field value != NULL\r",
+							"pm.test(\"Check NULL\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).not.equal(null);\r",
+							"    pm.expect(jsonData.planets).not.equal(null);\r",
+							"    pm.expect(jsonData.films).not.equal(null);\r",
+							"    pm.expect(jsonData.species).not.equal(null);\r",
+							"    pm.expect(jsonData.starships).not.equal(null);\r",
+							"})\r",
+							"\r",
+							"//4th case - check value is not empty\r",
+							"pm.test(\"Check if value is not empty\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).not.equal(\"\");\r",
+							"})\r",
+							"\r",
+							"//5th - Check specific\r",
+							"pm.test(\"Check specific\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).to.equal(\"http://swapi.dev/api/people/\");\r",
+							"})\r",
+							"//6th - Status code = ok\r",
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"//7 - STATUS MSG IS OK\r",
+							"pm.test(\"STATUS MSG IS OK\", function() {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"})\r",
+							"\r",
+							"//8 - response is below 1000ms\r",
+							"pm.test(\"response is below yhan 1000ms\", function(){\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"})\r",
+							"\r",
+							"//10 - Specific header with a specific value\r",
+							"pm.test(\"Specific header with a specific value\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\", \"application/json\")\r",
+							"})\r",
+							"\r",
+							"//11 - Cookies\r",
+							"pm.test(\"Cookies\", function(){\r",
+							"    pm.cookies.has(\"__cfduiddd122#@$#%#!2dd\")\r",
+							"})\r",
+							"\r",
+							"//12 - Cookies has value\r",
+							"pm.test(\"Cookies2\", function(){\r",
+							"    try{\r",
+							"    var MY_COOKIE = pm.cookies.get(\"__cfduiddd122\");\r",
+							"    console.log(MY_COOKIE)\r",
+							"    } catch(e) {\r",
+							"        console.log(\"CHET NE TO\" + e)\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.dev/api/",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
